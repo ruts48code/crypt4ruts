@@ -3,6 +3,7 @@ package crypt4ruts
 import (
 	"crypto/aes"
 	"encoding/base64"
+	"log"
 )
 
 func MooEncrypt(data, key []byte) []byte {
@@ -69,6 +70,7 @@ func MooHash(data, key, salt []byte) string {
 func AESEncrypt(key []byte, data []byte) []byte {
 	c, err := aes.NewCipher(key)
 	if err != nil {
+		log.Printf("Error: crypt4ruts-AESEncrypt - new cipher error - %v\n", err)
 		return make([]byte, 0)
 	}
 	out := make([]byte, len(data))
@@ -79,6 +81,7 @@ func AESEncrypt(key []byte, data []byte) []byte {
 func AESDecrypt(key []byte, data []byte) []byte {
 	c, err := aes.NewCipher(key)
 	if err != nil {
+		log.Printf("Error: crypt4ruts-AESDecrypt - new cipher error - %v\n", err)
 		return make([]byte, 0)
 	}
 	out := make([]byte, len(data))
